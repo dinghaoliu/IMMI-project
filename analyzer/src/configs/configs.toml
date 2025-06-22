@@ -1,0 +1,85 @@
+[functions]
+
+[functions.alloc]
+fs = [
+    "kcalloc",
+    "kzalloc",
+    "kmalloc",
+    "malloc",
+    "vmalloc",
+    "vzalloc",
+    "kmalloc_array",
+    "kvmalloc_array",
+    "kzalloc_node",
+    "kmemdup",
+    "calloc",
+]
+
+[functions.free]
+fs = [
+    "free",
+    "kfree",
+    "kvfree",
+    "vfree",
+    "kmem_cache_free",
+]
+
+[functions.llvmDebug]
+fs = [
+    "llvm.dbg.declare",
+    "llvm.dbg.value",
+    "llvm.dbg.label",
+    "llvm.lifetime.start",
+    "llvm.lifetime.end",
+    "llvm.lifetime.start.p0i8",
+    "llvm.lifetime.end.p0i8",
+    "arch_static_branch",
+    "printk",
+]
+
+[functions.heapAllocFuncs]
+fs = [
+    "kmalloc", "__kmalloc", "kmalloc_array",
+    "vmalloc", "__vmalloc",
+    "kzalloc", "vzalloc", "devm_kzalloc",
+    "krealloc",
+    "malloc",
+    "kmem_cache_alloc",
+    "__alloc_skb",
+    "kcalloc",
+]
+
+[files]
+
+[files.icall-ignore-list-fileloc]
+fs = [
+    "srcs/linux-stable-5.18/include/linux/kernel.h",
+    "srcs/linux-stable-5.18/include/linux/sched.h",
+    "srcs/linux-stable-6.2.2/include/linux/kernel.h",
+    "srcs/linux-stable-6.2.2/include/linux/sched.h",
+]
+
+[files.icall-ignore-list-linenum]
+fs = [
+    "110",
+    "2043",
+    "110",
+    "2071",
+]
+
+[macros]
+
+[macros.safe-macro-list]
+ms = [
+    "EXPORT_SYMBOL",
+]
+
+
+[databases]
+
+[databases.mysql]
+host = "127.0.0.1"
+port = "3306"
+username = ""
+password = ""
+dbname = ""

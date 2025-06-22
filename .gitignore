@@ -1,0 +1,30 @@
+# Project-specific ignores
+.vscode/
+TODO.md
+run.sh
+
+# Build directories
+analyzer/build/*
+analyzer/logs/*
+analyzer/testfiles_for_pair/*
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Configuration files with sensitive data
+config.local.*
+*.env
+.env.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.cache
+
+# OS generated files
+.DS_Store
+.DS_Store
