@@ -99,11 +99,11 @@ void PrintResults(GlobalContext *GCtx) {
     OP<< "\n";*/
 
     OP<< "############## Bug Detection Statistics ##############\n";
-    OP<< "# Number Intro-inconsistency bugs \t\t"<<GCtx->intro_inconsistency_bugs<<"\n";
-    OP<< "# Number Inter-inconsistency (Host Free) bugs \t"<<GCtx->inter_inconsistency_host_free_bugs<<"\n";
+    OP<< "# Number Intro-inconsistency bugs \t\t\t"<<GCtx->intro_inconsistency_bugs<<"\n";
+    OP<< "# Number Inter-inconsistency (Host Free) bugs \t\t"<<GCtx->inter_inconsistency_host_free_bugs<<"\n";
     OP<< "# Number Inter-inconsistency (Missing Free) bugs \t"<<GCtx->inter_inconsistency_missing_free_bugs<<"\n";
     OP<< "# Number Inter-inconsistency (Redundant Free) bugs \t"<<GCtx->inter_inconsistency_redundant_free_bugs<<"\n";
-    OP<< "# Total bugs found \t\t\t\t"<<(GCtx->intro_inconsistency_bugs + GCtx->inter_inconsistency_host_free_bugs + GCtx->inter_inconsistency_missing_free_bugs + GCtx->inter_inconsistency_redundant_free_bugs)<<"\n";
+    OP<< "# Total bugs found \t\t\t\t\t"<<(GCtx->intro_inconsistency_bugs + GCtx->inter_inconsistency_host_free_bugs + GCtx->inter_inconsistency_missing_free_bugs + GCtx->inter_inconsistency_redundant_free_bugs)<<"\n";
     OP<< "\n";
 
     OP<< "############## Time Statistics ##############\n";

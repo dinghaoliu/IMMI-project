@@ -67,7 +67,7 @@ The tool addresses a critical gap in memory safety analysis by detecting memory 
 
 ### Generating Bitcode Files
 
-For optimal analysis precision, O2-optimized bitcode files with debug info remained (-g) are recommended. O2-optimized bitcode files enable more precise error handling path analysis, leading to better bug detection accuracy.
+O0-optimized bitcode files with debug info remained (-g) are recommended. IMMI does not generate correct source code information in bug report while analyzing O2-optimized bitcode files.
 
 ### Configuration
 

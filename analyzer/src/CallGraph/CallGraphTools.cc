@@ -195,36 +195,41 @@ void CallGraphPass::getGlobalFuncs(Function *F, FuncSet &FSet){
 
 bool CallGraphPass::checkValidStructName(Type *Ty){
 
-    if(Ty->getStructName().size() != 0){
-
-        auto TyName = Ty->getStructName();
-        if(TyName.contains(".union")){
-            return false;
-        }
-
-        if(TyName.contains(".anon")){
-            return false;
-        }
-
-        return true;
-    }
-    else{
-        if(Ctx->Global_Literal_Struct_Map.count(typeHash(Ty))){
-
-            string TyName = Ctx->Global_Literal_Struct_Map[typeHash(Ty)];
-            if(hasSubString(TyName, ".union")){
+    if(Ty->isStructTy()){
+        StructType* STy = dyn_cast<StructType>(Ty);
+        if(STy->isLiteral()){
+            auto TyName = Ty->getStructName();
+            if(TyName.contains(".union")){
                 return false;
             }
 
-            if(hasSubString(TyName, ".anon")){
+            if(TyName.contains(".anon")){
                 return false;
             }
 
             return true;
         }
         else{
-            return false;
+            if(Ctx->Global_Literal_Struct_Map.count(typeHash(Ty))){
+
+                string TyName = Ctx->Global_Literal_Struct_Map[typeHash(Ty)];
+                if(hasSubString(TyName, ".union")){
+                    return false;
+                }
+
+                if(hasSubString(TyName, ".anon")){
+                    return false;
+                }
+
+                return true;
+            }
+            else{
+                return false;
+            }
         }
+    }
+    else{
+        return false;
     }
 }
 

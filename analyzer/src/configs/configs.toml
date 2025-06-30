@@ -13,6 +13,17 @@ fs = [
     "kzalloc_node",
     "kmemdup",
     "calloc",
+    "kcalloc_noprof",
+    "kzalloc_noprof",
+    "kmalloc_noprof",
+    "malloc_noprof",
+    "vmalloc_noprof",
+    "vzalloc_noprof",
+    "kmalloc_array_noprof",
+    "kvmalloc_array_noprof",
+    "kzalloc_node_noprof",
+    "kmemdup_noprof",
+    "calloc_noprof",
 ]
 
 [functions.free]

@@ -63,8 +63,15 @@ namespace load {
 namespace config {
     using namespace toml;
 
-    #define CONFIG_FILE "analyzer/src/configs/configs.toml"
-    parse_result loadConfig(string path=CONFIG_FILE);
+    // Support multiple possible config file paths
+    #define CONFIG_FILE_PATHS { \
+        "analyzer/src/configs/configs.toml", \
+        "src/configs/configs.toml", \
+        "../analyzer/src/configs/configs.toml", \
+        "configs/configs.toml" \
+    }
+    
+    parse_result loadConfig(string path="");
     // not supported
     node_view<node> getConfig(vector<string> keys, parse_result config);
 

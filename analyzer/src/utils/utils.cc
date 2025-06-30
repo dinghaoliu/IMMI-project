@@ -96,7 +96,22 @@ namespace load {
 
 namespace config {
     parse_result loadConfig(string path) {
-        return parse_file(path);
+        // If a specific path is provided, use it directly
+        if (!path.empty()) {
+            return parse_file(path);
+        }
+        
+        // Try multiple possible config file paths
+        vector<string> possible_paths = CONFIG_FILE_PATHS;
+        
+        for (const string& config_path : possible_paths) {
+            if (std::filesystem::exists(config_path)) {
+                return parse_file(config_path);
+            }
+        }
+        
+        // If no config file found, throw the original error with the first path
+        return parse_file(possible_paths[0]);
     }
 
     // don't use

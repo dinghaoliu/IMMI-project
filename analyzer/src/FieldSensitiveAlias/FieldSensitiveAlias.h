@@ -85,12 +85,12 @@ typedef struct AliasContext {
 
     AliasContext(){
 
-        NodeMap.clear();
+        /*NodeMap.clear();
         ToNodeMap.clear();
         FromNodeMap.clear();
         AnalyzedFuncSet.clear();
         PBToNodeMap.clear();
-        PBFromNodeMap.clear();
+        PBFromNodeMap.clear();*/
     }
 
     AliasContext(AliasContext *C){

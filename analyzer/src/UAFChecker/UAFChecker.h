@@ -80,6 +80,9 @@ class UAFCheckerPass : public IterativeModulePass {
         //Record nullification summary
         static map<string, map<int, set<string>>> GlobalNullSummaryMap;
 
+        //Record the functions that have been reported bugs
+        static set<string> GlobalReportedBugFuncSet;
+
         typedef struct ReleaseSummary {
             
             string Fname;

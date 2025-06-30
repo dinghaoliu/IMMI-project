@@ -546,8 +546,8 @@ void CallGraphPass::propagateType(Value *ToV, Type *FromTy, int FromIdx, StoreIn
         string From_Type_name = "";
         
         if(ToSTy->isStructTy()){
-
-            if(ToSTy->getStructName().size() == 0){
+            StructType* ToSTySTy = dyn_cast<StructType>(ToSTy);
+            if(ToSTySTy->isLiteral()){
                 To_Type_name = Ctx->Global_Literal_Struct_Map[typeHash(ToSTy)];
             }
             else{
@@ -557,8 +557,8 @@ void CallGraphPass::propagateType(Value *ToV, Type *FromTy, int FromIdx, StoreIn
         }
 
         if(FromTy->isStructTy()){
-
-            if(FromTy->getStructName().size() == 0){
+            StructType* FromSTy = dyn_cast<StructType>(FromTy);
+            if(FromSTy->isLiteral()){
                 From_Type_name = Ctx->Global_Literal_Struct_Map[typeHash(FromTy)];
             }
             else{

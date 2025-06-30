@@ -485,21 +485,33 @@ bool UAFCheckerPass::isValueErrno(Value *V, Function *F) {
     // The value is a constant integer.
     if (ConstantInt *CI = dyn_cast<ConstantInt>(V)) {
 
-        const int64_t value = CI->getValue().getSExtValue();
+        //const int64_t value = CI->getValue().getSExtValue();
 
         auto type = V->getType();
         int bitwidth = type->getIntegerBitWidth();
+        const llvm::APInt &val = CI->getValue();
         
         //This is a bool value
         //Bool value has a different logic from int
         //For a bool value, true means -1, false means 0
         if(bitwidth == 1){
-
+            const int64_t value = CI->getValue().getSExtValue();
             if(value == -1)
                 return false;
             else
                 return true;
         }
+
+        if(bitwidth == 128){
+			if (val.isNegative()) {
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+
+        const int64_t value = CI->getValue().getSExtValue();
 
         //Use this for openssl
 #ifdef OPENSSL_RETURN_STYLE

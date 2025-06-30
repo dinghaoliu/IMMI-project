@@ -258,7 +258,8 @@ void CallGraphPass::escapeType(StoreInst* SI, Type *Ty, int Idx) {
 
     if(Ty->isStructTy()){
 
-        if(Ty->getStructName().size() == 0){
+        StructType* STy = dyn_cast<StructType>(Ty);
+        if(STy->isLiteral()){
             string Ty_name = Ctx->Global_Literal_Struct_Map[typeHash(Ty)];
             typeEscapeSet.insert(typeNameIdxHash(Ty_name, Idx));
             hashIDTypeMap[typeNameIdxHash(Ty_name, Idx)] = make_pair(Ty,Idx);

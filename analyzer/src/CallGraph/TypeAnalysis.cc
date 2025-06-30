@@ -9,7 +9,8 @@ bool CallGraphPass::isEscape(Type *LayerTy, int FieldIdx, CallInst *CI){
 
     //If we use type name, we cannot resolve anon struct
     if(LayerTy->isStructTy()){
-        if(LayerTy->getStructName().size() == 0){
+        StructType* LayerSTy = dyn_cast<StructType>(LayerTy);
+        if(LayerSTy->isLiteral()){
             string Ty_name = Ctx->Global_Literal_Struct_Map[typeHash(LayerTy)];
 
             if(typeEscapeSet.find(typeNameIdxHash(Ty_name, FieldIdx)) != typeEscapeSet.end()){
@@ -60,9 +61,9 @@ void CallGraphPass::findCalleesWithTwoLayerTA(CallInst *CI, FuncSet PreLayerResu
     string LayerTy_name = "";
 
     if(LayerTy->isStructTy()){
-
+        StructType* LayerSTy = dyn_cast<StructType>(LayerTy);
         //findEqualTypes(LayerTy, FieldIdx, nextLayerResult);
-        if(LayerTy->getStructName().size() != 0){
+        if(LayerSTy->isLiteral()){
             auto Ty_name = LayerTy->getStructName();
             LayerTy_name = parseIdentifiedStructName(Ty_name);
         }
@@ -105,7 +106,8 @@ void CallGraphPass::findCalleesWithTwoLayerTA(CallInst *CI, FuncSet PreLayerResu
             nextLayerResult = typeFuncsMap[hashIdxHash(H, FieldIdx)];
             
             if(Hty->isStructTy()){
-                if(Hty->getStructName().size() == 0){
+                StructType* HtySTy = dyn_cast<StructType>(Hty);
+                if(HtySTy->isLiteral()){
                     string Ty_name = Ctx->Global_Literal_Struct_Map[typeHash(Hty)];
                     funcSetMerge(nextLayerResult, typeFuncsMap[typeNameIdxHash(Ty_name, FieldIdx)]);
                 }
@@ -148,7 +150,8 @@ void CallGraphPass::findCalleesWithTwoLayerTA(CallInst *CI, FuncSet PreLayerResu
             nextLayerResult = typeFuncsMap[H];
             
             if(Hty->isStructTy()){
-                if(Hty->getStructName().size() == 0){
+                StructType* HtySTy = dyn_cast<StructType>(Hty);
+                if(HtySTy->isLiteral()){
                     string Ty_name = Ctx->Global_Literal_Struct_Map[typeHash(Hty)];
                     funcSetMerge(nextLayerResult, typeFuncsMap[typeNameIdxHash(Ty_name, FieldIdx)]);
                 }
@@ -194,7 +197,8 @@ void CallGraphPass::findCalleesWithTwoLayerTA(CallInst *CI, FuncSet PreLayerResu
             nextLayerResult = typeFuncsMap[H];
             
             if(Hty->isStructTy()){
-                if(Hty->getStructName().size() == 0){
+                StructType* HtySTy = dyn_cast<StructType>(Hty);
+                if(HtySTy->isLiteral()){
                     string Ty_name = Ctx->Global_Literal_Struct_Map[typeHash(Hty)];
                     funcSetMerge(nextLayerResult, typeFuncsMap[typeNameIdxHash(Ty_name, Hid)]);
                 }

@@ -227,18 +227,24 @@ bool checkNodeConnectivity(AliasNode* node1, AliasNode* node2, AliasContext *ali
 
 bool checkValidStructName(Type *Ty){
 
-    if(Ty->getStructName().size() != 0){
+    if(Ty->isStructTy()){
+        StructType* STy = dyn_cast<StructType>(Ty);
+        if(STy->isLiteral()){
 
-        auto TyName = Ty->getStructName();
-        if(TyName.contains(".union")){
+            auto TyName = Ty->getStructName();
+            if(TyName.contains(".union")){
+                return false;
+            }
+
+            if(TyName.contains(".anon")){
+                return false;
+            }
+
+            return true;
+        }
+        else{
             return false;
         }
-
-        if(TyName.contains(".anon")){
-            return false;
-        }
-
-        return true;
     }
     else{
         return false;

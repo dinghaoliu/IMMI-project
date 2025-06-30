@@ -132,8 +132,8 @@ bool CallGraphPass::escapeChecker(StoreInst* SI, size_t escapeHash){
 
                     string Escape_Type_name = "";
                     if(escapeTy->isStructTy()){
-
-                        if(escapeTy->getStructName().size() == 0){
+                        StructType* escapeSTy = dyn_cast<StructType>(escapeTy);
+                        if(escapeSTy->isLiteral()){
                             Escape_Type_name = Ctx->Global_Literal_Struct_Map[typeHash(escapeTy)];
                         }
                         else{
@@ -144,8 +144,8 @@ bool CallGraphPass::escapeChecker(StoreInst* SI, size_t escapeHash){
 
                     string CT_Type_name = "";
                     if(CT.first->isStructTy()){
-
-                        if(CT.first->getStructName().size() == 0){
+                        StructType* CTSTy = dyn_cast<StructType>(CT.first);
+                        if(CTSTy->isLiteral()){
                             CT_Type_name = Ctx->Global_Literal_Struct_Map[typeHash(CT.first)];
                         }
                         else{
