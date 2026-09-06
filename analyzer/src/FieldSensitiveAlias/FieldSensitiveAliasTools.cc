@@ -229,7 +229,7 @@ bool checkValidStructName(Type *Ty){
 
     if(Ty->isStructTy()){
         StructType* STy = dyn_cast<StructType>(Ty);
-        if(STy->isLiteral()){
+        if(!STy->isLiteral()){
 
             auto TyName = Ty->getStructName();
             if(TyName.contains(".union")){
