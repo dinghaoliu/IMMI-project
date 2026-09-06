@@ -63,7 +63,7 @@ void CallGraphPass::findCalleesWithTwoLayerTA(CallInst *CI, FuncSet PreLayerResu
     if(LayerTy->isStructTy()){
         StructType* LayerSTy = dyn_cast<StructType>(LayerTy);
         //findEqualTypes(LayerTy, FieldIdx, nextLayerResult);
-        if(LayerSTy->isLiteral()){
+        if(!LayerSTy->isLiteral()){
             auto Ty_name = LayerTy->getStructName();
             LayerTy_name = parseIdentifiedStructName(Ty_name);
         }
